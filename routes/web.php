@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\PersonPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
-})->name('homepage');
+Route::get('/', [HomePageController::class, 'homepage'])
+    ->name('homepage');
 
 Route::view('/about', 'company.docker')->name('company');
 
 Route::prefix('/profile')->group( function () {
-    Route::get('/yernar', function () {
-        return view('profile.yernar');
-    })->name('profile.yernar');
-
-    Route::get('/askar', function () {
-        return view('profile.askar');
-    })->name('profile.askar');
+    Route::get('/welcome-page', [PersonPageController::class, 'welcomePage'])->name('profile.welcome');
+    Route::get('/{cityName}', [PersonPageController::class, 'detailPage'])->name('profile.detail');
 });

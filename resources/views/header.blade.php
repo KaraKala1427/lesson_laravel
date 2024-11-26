@@ -10,8 +10,8 @@
             <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('company') }}">Про нас</a>
 
             @guest
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('profile.askar') }}">Логин</a>
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('profile.yernar') }}">Регистрация</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="">Логин</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="">Регистрация</a>
             @endguest
         </nav>
     </div>
