@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PersonPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomePageController::class, 'homepage'])
+Route::get('/', [NewsController::class, 'index'])
     ->name('homepage');
 
-Route::view('/about', 'company.docker')->name('company');
+Route::get('/news/create-page', [HomePageController::class, 'getCreateNewsPage'])
+    ->name('create-news');
+
+Route::post('/news', [NewsController::class, 'create'])
+    ->name('create-news-post');
+
+Route::get('/news/{id}', [NewsController::class, 'detail'])
+    ->name('one-news');
+
+Route::get('/news/update/{id}', [NewsController::class, 'getUpdatePage'])
+    ->name('update-news-page');
+
+Route::post('/news/update/{id}', [NewsController::class, 'update'])
+    ->name('update-news-post');
+
+Route::view('/about', 'company.docker')->name('about');
 
 Route::prefix('/profile')->group( function () {
     Route::get('/welcome-page', [PersonPageController::class, 'welcomePage'])->name('profile.welcome');

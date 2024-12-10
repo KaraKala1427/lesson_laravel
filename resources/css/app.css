@@ -1,0 +1,9 @@
+.form-container {
+    width: 70%; /* Устанавливаем ширину формы */
+    max-width: 800px; /* Максимальная ширина */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #f8f9fa; /* Цвет фона */
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
+}

@@ -10,4 +10,9 @@ class HomePageController extends Controller
     {
         return view('homepage');
     }
+
+    public function getCreateNewsPage()
+    {
+        return view('create-news-page');
+    }
 }
