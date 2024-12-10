@@ -63,4 +63,15 @@ class NewsController extends Controller
 
         return redirect(route('one-news', $news->id));
     }
+
+    public function delete(int $id)
+    {
+        $deleted = News::destroy($id);
+
+        if($deleted) {
+            return redirect(route('homepage'));
+        }
+
+        return response()->json(['error' => 'Қате'], 500);
+    }
 }

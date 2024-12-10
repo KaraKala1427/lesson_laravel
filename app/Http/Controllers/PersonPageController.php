@@ -14,8 +14,6 @@ class PersonPageController extends Controller
     {
         $users = User::where('city', 'aktau')->get(); // eloquent
 
-        dd($users);
-
         return view('profile.detail-page',
             compact(['result'])
         );

@@ -34,6 +34,9 @@ Route::get('/news/update/{id}', [NewsController::class, 'getUpdatePage'])
 Route::post('/news/update/{id}', [NewsController::class, 'update'])
     ->name('update-news-post');
 
+Route::delete('/news/{id}', [NewsController::class, 'delete'])
+    ->name('delete-news');
+
 Route::view('/about', 'company.docker')->name('about');
 
 Route::prefix('/profile')->group( function () {
