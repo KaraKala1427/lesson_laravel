@@ -24,7 +24,15 @@
 <body>
 
 @include('header')
+
+@if(session('success'))
+    <div class="alert alert-success" style="margin-left: 10%; width: 500px;">
+        {{ session('success') }}
+    </div>
+@endif
 @yield('content')
+
+
 
 </body>
 </html>

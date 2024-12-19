@@ -5,6 +5,15 @@
 @section('content')
     <h1>Жаңалықты шығару</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger" style="margin-left: 20%; width: 500px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="form-container">
         <form action="{{route('create-news-post')}}" method="POST">
             @csrf
