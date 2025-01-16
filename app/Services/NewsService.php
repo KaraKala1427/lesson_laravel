@@ -1,54 +1,47 @@
 <?php
 
 
-namespace Services;
+namespace App\Services;
 
 use App\Models\News;
+use App\Repositories\NewsRepository;
 use Illuminate\Http\Request;
 
 class NewsService
 {
 
+    public function __construct(private NewsRepository $newsRepository)
+    {}
+
     public function getAll()
     {
-        return News::all();
+        return $this->newsRepository->all();
     }
+
     public function getById($id)
     {
-        return News::find($id);
+        return $this->newsRepository->findById($id);
     }
 
-    public function update(int $id, Request $request): News
+    public function update(int $id, array $data): News
     {
-        $news = News::find($id);
+        $news = $this->getById($id);
 
-        $news->title = $request->title;
-        $news->author_name = $request->author;
-        $news->image_url = $request->image_url;
-        $news->text = $request->news_text;
-        $news->views = $request->views;
-        $news->comments_count = $request->comments_count;
-
-        $news->save();
+        $this->newsRepository->update($news, $data);
 
         return $news;
     }
 
-    public function create(array $data)
+    public function create(array $data): bool
     {
-        $news = new News();
-        $news->title = $data['title'];
-        $news->author_name = $data['author'];
-        $news->image_url = $data['image_url'];
-        $news->text = $data['news_text'];
-        $news->views = 0;
-        $news->comments_count = 0;
+        $data['views'] = 0;
+        $data['comments_count'] = 0;
 
-        $news->save(); // insert into news
+        return $this->newsRepository->create($data);
     }
 
     public function delete(int $id)
     {
-        return News::destroy($id);
+       return $this->newsRepository->delete($id);
     }
 }

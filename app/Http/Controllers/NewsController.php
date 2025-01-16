@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsCreateRequest;
-use Illuminate\Http\Request;
-use Services\NewsService;
+use App\Http\Requests\NewsUpdateRequest;
+use App\Services\NewsService;
 
 
 class NewsController extends Controller
@@ -13,12 +13,21 @@ class NewsController extends Controller
     {
     }
 
-
     public function index()
     {
         $news = $this->newsService->getAll();
 
         return view('homepage', compact('news'));
+    }
+
+    public function indexApi()
+    {
+        $news = $this->newsService->getAll();
+
+        return response()->json([
+            'success' => true,
+            'data' => $news,
+        ]);
     }
 
     public function create(NewsCreateRequest $request)
@@ -30,11 +39,37 @@ class NewsController extends Controller
         return redirect(route('homepage'))->with('success', 'Жаңалық сәтті порталға шықты!');
     }
 
+    public function createApi(NewsCreateRequest $request)
+    {
+        $data = $request->validated();
+
+        $data['author'] = auth()->user()->name;
+
+        $this->newsService->create($data);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'message' => 'Жаңалық сәтті порталға шықты!',
+            ]
+        ], 201);
+    }
+
     public function detail(int $id)
     {
         $news = $this->newsService->getById($id);
 
         return view('detailed-news', compact(['news']));
+    }
+
+    public function detailApi(int $id)
+    {
+        $news = $this->newsService->getById($id);
+
+        return response()->json([
+            'success' => true,
+            'data' => $news,
+        ]);
     }
 
     public function getUpdatePage(int $id)
@@ -44,9 +79,9 @@ class NewsController extends Controller
         return view('update-news', compact(['news']));
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, NewsUpdateRequest $request)
     {
-        $news = $this->newsService->update($id, $request);
+        $news = $this->newsService->update($id, $request->validated());
 
         return redirect(route('one-news', $news->id));
     }
