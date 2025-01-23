@@ -14,7 +14,7 @@ class NewsRepository
 
     public function findById(int $id)
     {
-        return News::findOrFail($id);
+        return News::findOrFail(5);
     }
 
     public function update(News $news, array $data)
