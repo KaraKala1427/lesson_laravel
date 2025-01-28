@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class NewsService
 {
 
-    public function __construct(private NewsRepository $newsRepository)
+    public function __construct(private NewsRepository $newsRepository) // Dependency Injection
     {}
 
     public function getAll()
@@ -34,6 +34,7 @@ class NewsService
 
     public function create(array $data): bool
     {
+        $data['user_id'] = auth()->user()->id; // 19
         $data['views'] = 0;
         $data['comments_count'] = 0;
 

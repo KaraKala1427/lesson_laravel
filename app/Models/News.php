@@ -10,4 +10,3 @@ class News extends Model // наследование
     use HasFactory;
 }
 
-// MVC - model, view, controller

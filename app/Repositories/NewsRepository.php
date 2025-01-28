@@ -33,13 +33,13 @@ class NewsRepository
     {
         $news = new News();
         $news->title = $data['title'];
-        $news->author_name = $data['author'];
+        $news->user_id = $data['user_id'];
         $news->image_url = $data['image_url'];
         $news->text = $data['news_text'];
         $news->views = $data['views'];
         $news->comments_count = $data['comments_count'];
 
-        return $news->save();
+        return $news->save(); // insert into news (`title`, `author_name`, `image_url`, `text`, `views`, `comments_count`, `updated_at`, `created_at`) values (first News after reltions, Dulat Baizhanov, 123456789765432, Бәріне сәлем, Қазақстанды Головкин тағы да таңқалдырды ура ура ура!!!, 0, 0, 2025-01-28 14:56:11, 2025-01-28 14:56:11))
     }
 
     public function delete(int $id)

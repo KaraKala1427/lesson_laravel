@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::group([
 });
 
 Route::get('/news', [NewsController::class, 'indexApi'])->middleware('auth');
+Route::get('/my-news', [NewsController::class, 'myNews'])->middleware('auth');
+Route::get('/my-courses', [NewsController::class, 'myCourses'])->middleware('auth');
+Route::get('/courses/{title}', [CourseController::class, 'index']);
 
 Route::get('/news/{id}', [NewsController::class, 'detailApi'])->middleware('check-admin');
 
