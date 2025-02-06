@@ -110,4 +110,22 @@ class NewsController extends Controller
 
         return response()->json(['error' => 'Қате'], 500);
     }
+
+    public function isNewsTop(int $views)
+    {
+        if ($views > 100000) {
+            return true;
+        }
+
+        $a = 45;
+
+        $age = $this->calculateAge($a);
+
+        return false;
+    }
+
+    public function calculateAge(int $a)
+    {
+        return 34;
+    }
 }
